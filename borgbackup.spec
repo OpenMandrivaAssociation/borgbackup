@@ -48,3 +48,7 @@ it suitable for backups to not fully trusted targets.
 %py_install
   
 %files
+%{_bindir}/borg
+%{_bindir}/borgfs
+%{python_sitearch}/borg/
+%{python_sitearch}/borgbackup-%{version}.dist-info/
