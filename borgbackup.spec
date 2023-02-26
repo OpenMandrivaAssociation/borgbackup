@@ -26,7 +26,7 @@ BuildRequires:  python3dist(sphinx)
 BuildRequires:  python3dist(sphinx-rtd-theme)
 BuildRequires:  python3dist(python-dateutil)
 BuildRequires:  python3dist(wheel)
-BuildRequires:  python3dist(pipe)
+BuildRequires:  python3dist(pip)
 Recommends:     python3dist(llfuse)
 
 %description
