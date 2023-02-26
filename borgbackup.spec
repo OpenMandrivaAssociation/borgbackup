@@ -6,7 +6,7 @@ Summary:        Deduplicated backups
 
 License:        BSD
 URL:            https://borgbackup.github.io/
-Source0:        https://pypi.io/packages/source/b/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+Source0:        https://pypi.io/packages/source/b/%{name}/%{name}-%{version}.tar.gz
 
 BuildRequires:  pkgconfig(libb2)
 BuildRequires:  pkgconfig(libacl)
