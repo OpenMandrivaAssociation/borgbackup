@@ -1,6 +1,6 @@
 Name:           borgbackup
-Version:        1.2.3
-Release:        2
+Version:        1.2.4
+Release:        1
 Group:          Archiving/Backup
 Summary:        Deduplicated backups
 
