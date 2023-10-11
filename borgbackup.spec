@@ -1,12 +1,13 @@
 Name:           borgbackup
 Version:        1.2.6
-Release:        1
+Release:        2
 Group:          Archiving/Backup
 Summary:        Deduplicated backups
 
 License:        BSD
 URL:            https://borgbackup.github.io/
 Source0:        https://pypi.io/packages/source/b/%{name}/%{name}-%{version}.tar.gz
+Patch0:         raise-dep.patch
 
 BuildRequires:  pkgconfig(libb2)
 BuildRequires:  pkgconfig(libacl)
