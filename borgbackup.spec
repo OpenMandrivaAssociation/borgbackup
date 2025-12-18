@@ -3,32 +3,33 @@ Version:        1.4.0
 Release:        2
 Group:          Archiving/Backup
 Summary:        Deduplicated backups
-
 License:        BSD
 URL:            https://borgbackup.github.io/
 Source0:        https://pypi.io/packages/source/b/%{name}/%{name}-%{version}.tar.gz
 #Patch0:         raise-dep.patch
 
-BuildRequires:  pkgconfig(libb2)
+BuildSystem:	python
+
 BuildRequires:  pkgconfig(libacl)
-BuildRequires:  pkgconfig(libzstd)
-BuildRequires:  pkgconfig(libxxhash)
+BuildRequires:  pkgconfig(libb2)
 BuildRequires:  pkgconfig(liblz4)
+BuildRequires:  pkgconfig(libxxhash)
+BuildRequires:  pkgconfig(libzstd)
 BuildRequires:  pkgconfig(openssl)
-BuildRequires:  pkgconfig(python3)
-BuildRequires:  python3dist(cython)
-BuildRequires:  python3dist(llfuse)
-BuildRequires:  python3dist(msgpack)
-BuildRequires:  python3dist(pkgconfig)
-BuildRequires:  python3dist(pytest)
-BuildRequires:  python3dist(setuptools)
-BuildRequires:  python3dist(setuptools-scm)
-BuildRequires:  python3dist(sphinx)
-BuildRequires:  python3dist(sphinx-rtd-theme)
-BuildRequires:  python3dist(python-dateutil)
-BuildRequires:  python3dist(wheel)
-BuildRequires:  python3dist(pip)
-Recommends:     python3dist(llfuse)
+BuildRequires:  pkgconfig(python)
+BuildRequires:  python%{pyver}dist(cython)
+BuildRequires:  python%{pyver}dist(llfuse)
+BuildRequires:  python%{pyver}dist(msgpack)
+BuildRequires:  python%{pyver}dist(pip)
+BuildRequires:  python%{pyver}dist(pkgconfig)
+BuildRequires:  python%{pyver}dist(pytest)
+BuildRequires:  python%{pyver}dist(python-dateutil)
+BuildRequires:  python%{pyver}dist(setuptools)
+BuildRequires:  python%{pyver}dist(setuptools-scm)
+BuildRequires:  python%{pyver}dist(sphinx)
+BuildRequires:  python%{pyver}dist(sphinx-rtd-theme)
+BuildRequires:  python%{pyver}dist(wheel)
+Recommends:     python%{pyver}dist(llfuse)
 
 %description
 BorgBackup (short: Borg) is a deduplicating backup program.
@@ -39,17 +40,21 @@ The data deduplication technique used makes Borg suitable for daily backups
 since only changes are stored. The authenticated encryption technique makes
 it suitable for backups to not fully trusted targets.
 
-
 %prep
-%autosetup -p1
-  
+%autosetup -n %{name}-%{version} -p1
+# Remove upstream's egg-info
+rm -vrf src/%{name}.egg-info
+
 %build
+export CLFAGS="%{optflags}"
+export LDFLAGS="%{ldflags} -lpython%{py_ver}"
 %py_build
-  
+
+%install
 %py_install
-  
+
 %files
 %{_bindir}/borg
 %{_bindir}/borgfs
 %{python_sitearch}/borg/
-%{python_sitearch}/borgbackup-%{version}.dist-info/
+%{python_sitearch}/%{name}-%{version}.dist-info/
