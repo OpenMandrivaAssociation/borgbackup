@@ -1,5 +1,5 @@
 Name:		borgbackup
-Version:	1.4.3
+Version:	1.4.4
 Release:	1
 Group:		Archiving/Backup
 Summary:	Deduplicated backups
@@ -9,7 +9,6 @@ Source0:	https://pypi.io/packages/source/b/%{name}/%{name}-%{version}.tar.gz
 #Patch0:	raise-dep.patch
 
 BuildSystem:	python
-
 BuildRequires:	pkgconfig(libacl)
 BuildRequires:	pkgconfig(libb2)
 BuildRequires:	pkgconfig(liblz4)
@@ -40,20 +39,15 @@ The data deduplication technique used makes Borg suitable for daily backups
 since only changes are stored. The authenticated encryption technique makes
 it suitable for backups to not fully trusted targets.
 
-%prep
-%autosetup -n %{name}-%{version} -p1
+%prep -a
 # Remove upstream's egg-info
 rm -vrf src/%{name}.egg-info
 
-%build
+%build -p
 export CLFAGS="%{optflags}"
 export LDFLAGS="%{ldflags} -lpython%{py_ver}"
 # disable msgpack version check - https://github.com/borgbackup/borg/issues/9109
 #export BORG_MSGPACK_VERSION_CHECK=no
-%py_build
-
-%install
-%py_install
 
 %files
 %{_bindir}/borg
