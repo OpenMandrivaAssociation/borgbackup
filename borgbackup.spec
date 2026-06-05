@@ -1,6 +1,6 @@
 Name:		borgbackup
 Version:	1.4.4
-Release:	1
+Release:	2
 Group:		Archiving/Backup
 Summary:	Deduplicated backups
 License:	BSD
