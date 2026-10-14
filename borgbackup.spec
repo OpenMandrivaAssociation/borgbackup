@@ -42,6 +42,10 @@ it suitable for backups to not fully trusted targets.
 %prep -a
 # Remove upstream's egg-info
 rm -vrf src/%{name}.egg-info
+# 1.4-maint accepts msgpack 1.2.3. Cooker has 1.2.3-1 (a leak fix);
+# 1.4.5 still declared <=1.2.1, which extra tests cannot install.
+sed -i 's/msgpack >=1.0.3, <=1.2.1/msgpack >=1.0.3, <=1.2.3/' pyproject.toml
+sed -i 's/<= (1, 2, 1)/<= (1, 2, 3)/' src/borg/helpers/msgpack.py
 
 %build -p
 export CLFAGS="%{optflags}"
