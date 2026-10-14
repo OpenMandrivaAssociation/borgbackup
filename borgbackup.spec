@@ -1,6 +1,6 @@
 Name:		borgbackup
 Version:	1.4.5
-Release:	1
+Release:	2
 Group:		Archiving/Backup
 Summary:	Deduplicated backups
 License:	BSD
@@ -15,7 +15,7 @@ BuildRequires:	pkgconfig(liblz4)
 BuildRequires:	pkgconfig(libxxhash)
 BuildRequires:	pkgconfig(libzstd)
 BuildRequires:	pkgconfig(openssl)
-BuildRequires:	pkgconfig(python)
+BuildRequires:	pkgconfig(python3)
 BuildRequires:	python%{pyver}dist(cython)
 BuildRequires:	python%{pyver}dist(llfuse)
 BuildRequires:	python%{pyver}dist(msgpack)
